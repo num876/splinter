@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
 
     let currentProjectId = projectId;
     let projectRef = null;
-    let project = null;
+    let project: any = null;
 
     if (!isMock) {
       if (!currentProjectId) {

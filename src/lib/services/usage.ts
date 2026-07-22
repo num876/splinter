@@ -1,26 +1,30 @@
-import { adminDb } from '../firebase/admin';
-import * as admin from 'firebase-admin';
+import { adminDb } from '@/lib/firebase/admin';
+import { FieldValue } from 'firebase-admin/firestore';
 
 export async function checkUsage(userId: string): Promise<{ used: number; limit: number; canGenerate: boolean }> {
-  const userDoc = await adminDb.collection('users').doc(userId).get();
+  const userRef = adminDb.collection('users').doc(userId);
+  const doc = await userRef.get();
   
-  if (!userDoc.exists) {
-    // Default fallback if user doc missing (e.g. they just signed up and trigger hasn't fired or doc wasn't created)
-    return { used: 0, limit: 5, canGenerate: true };
+  if (!doc.exists) {
+    // Free plan default limits: 5 generations
+    return { canGenerate: true, limit: 5, used: 0 };
   }
-
-  const data = userDoc.data();
-  const used = data?.monthly_usage || 0;
+  
+  const data = doc.data();
   const limit = data?.usage_limit || 5;
-  const canGenerate = used < limit;
-
-  return { used, limit, canGenerate };
+  const used = data?.monthly_usage || 0;
+  
+  return {
+    canGenerate: used < limit,
+    limit,
+    used
+  };
 }
 
-export async function incrementUsage(userId: string): Promise<void> {
+export async function incrementUsage(userId: string) {
   const userRef = adminDb.collection('users').doc(userId);
   await userRef.set({
-    monthly_usage: admin.firestore.FieldValue.increment(1)
+    monthly_usage: FieldValue.increment(1)
   }, { merge: true });
 }
 

@@ -34,7 +34,7 @@ export async function GET(req: NextRequest) {
       
       // Fetch outputs for this project (subcollection)
       const outputsSnap = await adminDb.collection(`projects/${doc.id}/outputs`).get();
-      const outputs = outputsSnap.docs.map(o => ({ id: o.id, ...o.data() }));
+      const outputs = outputsSnap.docs.map((o: any) => ({ id: o.id, ...o.data() }));
 
       // Handle Timestamp serialization for client
       projects.push({

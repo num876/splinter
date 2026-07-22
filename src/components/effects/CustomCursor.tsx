@@ -6,7 +6,7 @@ import './CustomCursor.css';
 export default function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
-  const requestRef = useRef<number>();
+  const requestRef = useRef<number | null>(null);
   const mousePosition = useRef({ x: 0, y: 0 });
 
   const [isHovering, setIsHovering] = useState(false);
