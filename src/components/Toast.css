@@ -1,0 +1,79 @@
+.splinter-toast-container {
+  position: fixed;
+  top: var(--space-4);
+  right: var(--space-4);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  pointer-events: none;
+}
+
+.splinter-toast {
+  display: flex;
+  align-items: center;
+  padding: var(--space-3) var(--space-4);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  pointer-events: auto;
+  animation: slideInRight var(--transition-base) forwards;
+  min-width: 300px;
+  max-width: 400px;
+  gap: var(--space-3);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.splinter-toast--success {
+  border-left: 4px solid var(--success);
+}
+.splinter-toast--error {
+  border-left: 4px solid var(--danger);
+}
+.splinter-toast--warning {
+  border-left: 4px solid var(--warning);
+}
+.splinter-toast--info {
+  border-left: 4px solid var(--info);
+}
+
+.splinter-toast__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  font-weight: bold;
+  font-size: var(--text-sm);
+}
+
+.splinter-toast--success .splinter-toast__icon { color: var(--success); background: var(--success-bg); }
+.splinter-toast--error .splinter-toast__icon { color: var(--danger); background: var(--danger-bg); }
+.splinter-toast--warning .splinter-toast__icon { color: var(--warning); background: var(--warning-bg); }
+.splinter-toast--info .splinter-toast__icon { color: var(--info); background: var(--info-bg); }
+
+.splinter-toast__message {
+  flex: 1;
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+}
+
+.splinter-toast__close {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: var(--text-xl);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--transition-fast);
+}
+
+.splinter-toast__close:hover {
+  color: var(--text-primary);
+}

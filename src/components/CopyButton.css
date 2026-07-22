@@ -1,0 +1,32 @@
+.splinter-copy-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.splinter-copy-btn:hover {
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+}
+
+.splinter-copy-btn--success {
+  color: var(--success);
+  border-color: rgba(34, 197, 94, 0.3);
+}
+
+.splinter-copy-btn__icon {
+  width: 16px;
+  height: 16px;
+}
+
+.splinter-copy-btn__icon--check {
+  animation: scaleIn var(--transition-fast) forwards;
+}
