@@ -36,7 +36,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
 
     // Fetch outputs
     const outputsSnap = await adminDb.collection(`projects/${projectId}/outputs`).get();
-    const outputs = outputsSnap.docs.map(o => ({ id: o.id, ...o.data() }));
+    const outputs = outputsSnap.docs.map((o: any) => ({ id: o.id, ...o.data() }));
 
     const project = {
       id: projectDoc.id,
@@ -88,7 +88,7 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{ i
     // Delete outputs subcollection first
     const outputsSnap = await adminDb.collection(`projects/${projectId}/outputs`).get();
     const batch = adminDb.batch();
-    outputsSnap.docs.forEach(doc => {
+    outputsSnap.docs.forEach((doc: any) => {
       batch.delete(doc.ref);
     });
     
