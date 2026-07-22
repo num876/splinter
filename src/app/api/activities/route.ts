@@ -30,7 +30,7 @@ export async function GET(req: NextRequest) {
       .limit(20)
       .get();
       
-    const activities = snapshot.docs.map(doc => doc.data());
+    const activities = snapshot.docs.map((doc: any) => doc.data());
     return NextResponse.json({ activities }, { status: 200 });
   } catch (error) {
     console.error('Activities GET error:', error);
