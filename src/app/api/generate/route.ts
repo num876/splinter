@@ -5,6 +5,7 @@ import { checkUsage, incrementUsage } from '@/lib/services/usage';
 import { logActivity } from '@/lib/services/activity';
 import { OutputFormat, Tone } from '@/lib/types';
 import * as admin from 'firebase-admin';
+import { FieldValue } from 'firebase-admin/firestore';
 
 export async function POST(req: NextRequest) {
   try {
@@ -54,8 +55,8 @@ export async function POST(req: NextRequest) {
           tone: tone || 'professional',
           custom_instructions: customInstructions || null,
           status: 'completed',
-          created_at: admin.firestore.FieldValue.serverTimestamp(),
-          updated_at: admin.firestore.FieldValue.serverTimestamp(),
+          created_at: FieldValue.serverTimestamp(),
+          updated_at: FieldValue.serverTimestamp(),
         });
         currentProjectId = projectRef.id;
         const projectDoc = await projectRef.get();
@@ -98,7 +99,7 @@ export async function POST(req: NextRequest) {
             format,
             content: generatedContent,
             is_edited: false,
-            created_at: admin.firestore.FieldValue.serverTimestamp(),
+            created_at: FieldValue.serverTimestamp(),
           });
           
           const doc = await outputRef.get();
