@@ -2,7 +2,7 @@ import { initializeApp, getApps, cert } from 'firebase-admin/app';
 import { getAuth } from 'firebase-admin/auth';
 import { getFirestore } from 'firebase-admin/firestore';
 
-if (!getApps().length) {
+if (!getApps().length && process.env.FIREBASE_PROJECT_ID) {
   try {
     initializeApp({
       credential: cert({
